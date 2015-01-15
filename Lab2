@@ -1,0 +1,200 @@
+using System;
+using System.Linq;
+
+namespace ConsoleApplication1
+{
+    internal class Program
+    {
+        private static void Main(string[] args)
+        {
+
+            string errorMsg = "";
+            bool validated = true;
+
+            if (args.Count() > 0)
+            {
+                string firstName = args[0];
+                validated = ValidateString(firstName);
+                if (validated == false)
+                {
+                    errorMsg = "First name could not be validated.";
+                }
+                Console.WriteLine(Environment.NewLine + "First name: " + firstName + "   " + errorMsg);
+                errorMsg = "";
+            }
+
+            if (args.Count() > 1)
+            {
+                string lastName = args[1];
+                validated = ValidateString(lastName);
+                if (validated == false)
+                {
+                    errorMsg = "Last name could not be validated.";
+                }
+                Console.WriteLine("Last name: " + lastName + "   " + errorMsg);
+                errorMsg = "";
+            }
+
+            if (args.Count() > 2)
+            {
+                string bDay = args[2];
+                validated = ValidateDateTime(bDay);
+                if (validated == false)
+                {
+                    errorMsg = "Birthday could not be validated.";
+                }
+                Console.WriteLine("Birthday: " + bDay + "   " + errorMsg);
+                errorMsg = "";
+            }
+
+            if (args.Count() > 3)
+            {
+                string currentDay = args[3];
+                validated = ValidateDateTime(currentDay);
+                if (validated == false)
+                {
+                    errorMsg = "Current date could not be validated.";
+                }
+                else
+                {
+                    DateTime today = DateTime.Today;
+                    bool correct = currentDay.Equals(today.ToString("d"));
+                    if (!correct)
+                    {
+                        errorMsg = "That is not the current date.";
+                    }
+                }
+                Console.WriteLine("Current day: " + currentDay + "   " + errorMsg);
+                errorMsg = "";
+            }
+
+            if (args.Count() > 4)
+            {
+                string yearsOfCollege = args[4];
+                validated = ValidateInt(yearsOfCollege);
+                if (validated == false)
+                {
+                    errorMsg = "Years in college could not be validated.";
+                }
+                Console.WriteLine("Number of years in college: " + yearsOfCollege + "   " + errorMsg);
+                errorMsg = "";
+            }
+
+            if (args.Count() > 5)
+            {
+                string phoneNumber = args[5];
+                validated = ValidateLong(phoneNumber);
+                if (validated == false)
+                {
+                    errorMsg = "Phone number could not be validated.";
+                }
+                Console.WriteLine("Phone number: " + phoneNumber + "   " + errorMsg);
+                errorMsg = "";
+            }
+
+            if (args.Count() > 6)
+            {
+                string streetAddress = args[6];
+                validated = ValidateString(streetAddress);
+                if (validated == false)
+                {
+                    errorMsg = "Street address could not be validated.";
+                }
+                Console.WriteLine("Street Address: " + streetAddress  + "   " + errorMsg);
+                errorMsg = "";
+            }
+
+            if (args.Count() > 7)
+            {
+                string city = args[7];
+                validated = ValidateString(city);
+                if (validated == false)
+                {
+                    errorMsg = "City name could not be validated.";
+                }
+                Console.WriteLine("City: " + city + "   " + errorMsg);
+                errorMsg = "";
+            }
+
+            if (args.Count() > 8)
+            {
+                string state = args[8];
+                validated = ValidateString(state);
+                if (validated == false)
+                {
+                    errorMsg = "State name could not be validated.";
+                }
+                Console.WriteLine("State: " + state + "   " + errorMsg);
+                errorMsg = "";
+            }
+
+            if (args.Count() > 9)
+            {
+                string zipCode = args[9];
+                validated = ValidateInt(zipCode);
+                if (validated == false)
+                {
+                    errorMsg = "Zip code could not be validated.";
+                }
+                Console.WriteLine("Zip code: " + zipCode  + "   " + errorMsg);
+            }
+            
+            //Console.WriteLine(errorMsg);
+            //Console.WriteLine("Please see corresponding fields below: ");   
+        }
+
+
+        private static bool ValidateString(string firstName)
+        {
+            if (String.IsNullOrEmpty(firstName))
+            {
+                return false;
+            }
+            foreach (char c in firstName)
+            {
+                if (!char.IsLetter(c))
+                    return false;
+            }
+            return true;
+        }
+
+        private static bool ValidateDateTime(string date)
+        {
+            try
+            {
+                DateTime.Parse(date);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private static bool ValidateInt(string yearsOfCollege)
+        {
+            int years;
+            int.TryParse(yearsOfCollege, out years);
+            if (years == 0)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private static bool ValidateLong(string phoneNumber)
+        {
+            long phone;
+            if (long.TryParse(phoneNumber, out phone))
+            {
+                if (phone > 999999999)
+                {
+                    return true;
+                }
+                return false;
+            }
+            return false;
+        }
+
+    }
+}
