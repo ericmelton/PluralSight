@@ -1,0 +1,35 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        float total = 0;
+        string notInts = "The strings you entered are: ";
+        bool isInt = true;
+        foreach (string arg in args)
+        {
+            isInt = checkIfString(arg);
+            if (isInt)
+            {
+                total += float.Parse(arg);
+            }
+            else
+            {
+                notInts += (arg + "...");
+            }
+
+        }
+        Console.WriteLine("The total of the parameters is: " + total + Environment.NewLine + notInts + Environment.NewLine);
+    }
+
+    private static bool checkIfString(string arg)
+    {
+        foreach (char c in arg)
+        {
+            if (char.IsLetter(c))
+                return false;
+        }
+        return true;
+    }
+}
